@@ -438,8 +438,6 @@
             <button type="button" onclick="showMenu('whitening')">フットケア</button>
         </div>
 
-        <div id="treatment-text" style="margin-bottom: 20px;"></div>
-
         <div id="male" class="menu-section">
             <div class="highlight-background">
                 <span class="highlight-text">◆ハンドジェルネイル◆</span>
@@ -596,7 +594,6 @@
             'ケアマニキュア': 90,
             '角質除去': 60
         };
-
 
         let selectedMenuTime = 0;
 
@@ -949,7 +946,7 @@
                 return;
             }
 
-            const url = 'https://script.google.com/macros/s/AKfycbzWEP8x_8iMbnB59pSm0MjNBqcAwxuB3ibG6PCOIuOzJn-tNMKj0drawPGn6bEV3ITIOg/exec' +
+            const url = 'https://script.google.com/macros/s/AKfycbyNm6Lp93h4ciTVW2X0zLwxGwACD5RPbQ7HJNXrgSv4m76Ikohh2bG0XTRfUzfuOTZttw/exec' +
                 `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
             try {

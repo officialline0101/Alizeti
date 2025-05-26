@@ -11,7 +11,7 @@
             position: fixed; /* 画面スクロールしても固定 */
             right: -5px; /* さらに右へ */
             top: 80%; /* 画面中央に固定 */
-            transform: translateY(-50%) translateX(20px); /* 中央配置と右ずらし */
+            transform: translateY(-50%) translateX(13px); /* 中央配置と右ずらし */
             background: #262626;
             display: flex;
             flex-direction: column;
@@ -742,6 +742,8 @@
             <button type="button" onclick="showMenu('whitening')">フットケア</button>
         </div>
 
+        <div id="treatment-text" style="display: none; margin-bottom: 10px;"></div>
+
         <div id="male" class="menu-section">
             <div class="highlight-background">
                 <span class="highlight-text">◆ハンドジェルネイル◆</span>
@@ -751,14 +753,14 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="15000">マグネットワンカラー</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="15000">グラデーション</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment4')" data-price="15000">ラメグラデーション</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="15000">フレンチ</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="15000">持ち込みデザイン（２時間内）</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="15000">おまかせデザイン（２時間内）</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment4')" data-price="15000">持ち込みデザイン（２時間２０分内）</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="15000">おまかせデザイン（２時間２０分内）</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="15000">持ち込みしっかりデザイン</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="15000">スカルプ10本</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment4')" data-price="15000">ケアマニキュア</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">フレンチ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-price="15000">持ち込みデザイン（２時間内）</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-price="15000">おまかせデザイン（２時間内）</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment8')" data-price="15000">持ち込みデザイン（２時間２０分内）</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment9')" data-price="15000">おまかせデザイン（２時間２０分内）</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment10')" data-price="15000">持ち込みしっかりデザイン</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment11')" data-price="15000">スカルプ10本</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment12')" data-price="15000">ケアマニキュア</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">ハンドジェルネイル：オプション</span>
@@ -774,13 +776,13 @@
                 <span class="highlight-text">◆フットジェルネイル◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">ワンカラー</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-price="15000">マグネットワンカラー</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-price="15000">グラデーション</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">ラメグラデーション</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-price="15000">フレンチ</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment7')" data-price="15000">持ち込みデザイン（２時間内）</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">おまかせデザイン（２時間内）</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment13')" data-price="15000">ワンカラー</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment14')" data-price="15000">マグネットワンカラー</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment15')" data-price="15000">グラデーション</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment16')" data-price="15000">ラメグラデーション</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment17')" data-price="15000">フレンチ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment18')" data-price="15000">持ち込みデザイン（２時間内）</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment19')" data-price="15000">おまかせデザイン（２時間内）</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">フットジェルネイル：オプション</span>
@@ -795,8 +797,8 @@
                 <span class="highlight-text">◆フットケア◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment8')" data-price="15000">ケアマニキュア</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment9')" data-price="15000">角質除去</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment20')" data-price="15000">ケアマニキュア</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment21')" data-price="15000">角質除去</button>
             </div>
         </div>
 
@@ -1058,12 +1060,15 @@
 
             // 選択されたオプションを取得
             const updatedSelectedButtons = document.querySelectorAll('.symptoms button.active');
+            const treatmentText = document.getElementById('treatment-text');
 
             if (updatedSelectedButtons.length === 0) {
                 // すべてのボタンの選択が解除された場合、メニュー時間を0にリセット
                 selectedMenuTime = 0;
                 selectedSymptom = null; // 選択されたメニューをリセット
                 menuPrice = 0; // メニュー価格をリセット
+                treatmentText.style.display = 'none';
+                return; // ここで処理を終了
             } else {
                 // 1つだけ選択状態にする
                 if (updatedSelectedButtons.length > 1) {
@@ -1083,30 +1088,57 @@
             // カレンダーを更新するために取得する日付を渡す
             fetchAvailability(currentDate);
 
-            // トリートメントテキストを表示
-            const treatmentText = document.getElementById('treatment-text');
-
             if (treatmentId === 'treatment1') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：90分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：6,500円<br>初診料：＋2,200円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>ワンカラー：￥6600円</strong></div>`;
             } else if (treatmentId === 'treatment2') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：60分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：4,500円<br>初診料：＋2,200円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>マグネットワンカラー：￥7700円</strong></div>`;
             } else if (treatmentId === 'treatment3') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：120分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：8,700円<br>初診料：＋2,200円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>グラデーション：￥7700円</strong></div>`;
             } else if (treatmentId === 'treatment4') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：30分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：1,700円<br>初診料：＋2,200円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>ラメグラデーション：￥6600円</strong></div>`;
             } else if (treatmentId === 'treatment5') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：60分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：6,500円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>フレンチ：￥7700円</strong></div>`;
             } else if (treatmentId === 'treatment6') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：30分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：4,500円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>持ち込みデザイン（２時間内）：￥8800円</strong></div>`;
             } else if (treatmentId === 'treatment7') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：90分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：8,700円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>おまかせデザイン（２時間内）：￥8800円</strong></div>`;
             } else if (treatmentId === 'treatment8') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：15分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：1,700円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>持ち込みデザイン（２時間２０分内）：￥9900円</strong></div>`;
             } else if (treatmentId === 'treatment9') {
-                treatmentText.innerHTML = `<div style="text-align: left;"><strong>所要時間：15分</strong><br>※症状によりお時間が前後する場合がございます</div><div style="text-align: right;"><strong>料金：1,700円</strong></div>`;
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>おまかせデザイン（２時間２０分内）：￥9900円</strong></div>`;
+            } else if (treatmentId === 'treatment10') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>持ち込みしっかりデザイン：￥11000円～</strong></div>`;
+            } else if (treatmentId === 'treatment11') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>スカルプ10本：￥11000円</strong></div>`;
+            } else if (treatmentId === 'treatment12') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>ケアマニキュア：￥3300円</strong></div>`;
+            } else if (treatmentId === 'treatment13') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>ワンカラー：￥6600円</strong></div>`;
+            } else if (treatmentId === 'treatment14') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>マグネットワンカラー：￥7700円</strong></div>`;
+            } else if (treatmentId === 'treatment15') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>グラデーション：￥7700円</strong></div>`;
+            } else if (treatmentId === 'treatment16') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>ラメグラデーション：￥6600円</strong></div>`;
+            } else if (treatmentId === 'treatment17') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>フレンチ：￥7700円</strong></div>`;
+            } else if (treatmentId === 'treatment18') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>持ち込みデザイン（２時間内）：￥8800円</strong></div>`;
+            } else if (treatmentId === 'treatment19') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>おまかせデザイン（２時間内）：￥8800円</strong></div>`;
+            } else if (treatmentId === 'treatment20') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>ケアマニキュア：￥3300円</strong></div>`;
+            } else if (treatmentId === 'treatment21') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>フット角質除去のみ：￥4400円<br>他のメニューに追加の方は角質除去：￥2200円</strong></div>`;
             } else {
                 treatmentText.innerHTML = '';
             }
+
+            // `treatment-text` を選択されたボタンの直後に移動
+            button.parentNode.insertBefore(treatmentText, button.nextSibling);
+
+            // トリートメントテキストを表示
+            treatmentText.style.display = 'block';
 
             // 選択されたメニューの名前と価格を取得
             const symptomName = button.textContent;  // ボタンのテキストを取得
@@ -1178,6 +1210,9 @@
         }
 
         function showMenu(menu) {
+            // `treatment-text` を非表示にする
+            document.getElementById("treatment-text").style.display = "none";
+
             // 選択されたメニューの名前を取得
             let selectedButton = document.querySelector(`.menu-sections button[onclick="showMenu('${menu}')"]`);
             if (selectedButton) {

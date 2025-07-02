@@ -493,6 +493,33 @@
             }
         }
 
+.info-textmemo {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+
+    margin-top: 20px;       /* 上の余白 */
+    margin-bottom: 10px;    /* 下に白い隙間を追加 */
+    font-size: 13px;
+    color: #000000;
+    line-height: 1.5;
+    text-align: center;
+    word-wrap: break-word;
+    background-color: #eef9f5;  /* 青っぽい背景色を追加 */
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* 携帯端末向けのレスポンシブデザイン */
+@media (max-width: 768px) {
+    .info-textmemo {
+        font-size: 11.5px;   /* スマホでは少し小さく */
+        margin-top: 10px;    /* 上下のマージンを調整 */
+        line-height: 2.0;    /* テキストの高さ調整 */
+    }
+}
+
+
         .symptoms,
         .options {
             display: block;
@@ -766,7 +793,12 @@
                 <span class="highlight-text">ハンドジェルネイル：オプション</span>
             </div>
             <div class="irradiations">
-                <div class="info-text">１ヶ月以降の方はこちらからお選びください。</div>
+            <div class="info-textmemo">⇩初めての方はこちらからお選びください⇩</div>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
+            </div>
+            <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
+                        <div class="irradiations">
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">他店ジェルオフ</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
@@ -790,9 +822,15 @@
                 <span class="highlight-text">フットジェルネイル：オプション</span>
             </div>
             <div class="irradiations">
-                <div class="info-text">１ヶ月以降の方はこちらからお選びください。</div>
+            <div class="info-textmemo">⇩初めての方はこちらからお選びください⇩</div>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
+            </div>
+            <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
+                        <div class="irradiations">
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">他店ジェルオフ</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
             </div>
         </div>
 

@@ -788,20 +788,23 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment10')" data-price="15000">持ち込みしっかりデザイン</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment11')" data-price="15000">スカルプ10本</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment12')" data-price="15000">ケアマニキュア</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment22')" data-price="15000">自店オフのみ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment23')" data-price="15000">他店オフのみ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment24')" data-price="15000">自店スカルプオフのみ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment25')" data-price="15000">他店スカルプオフのみ</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">ハンドジェルネイル：オプション</span>
             </div>
             <div class="irradiations">
-            <div class="info-textmemo">⇩初めての方はこちらからお選びください⇩</div>
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
             </div>
             <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
                         <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">他店ジェルオフ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ金額：1,100円</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">他店ジェルオフ金額：1,100円</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ金額：1,100円</button>
             </div>
         </div>
 
@@ -817,20 +820,21 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment17')" data-price="15000">フレンチ</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment18')" data-price="15000">持ち込みデザイン（２時間内）</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment19')" data-price="15000">おまかせデザイン（２時間内）</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment26')" data-price="15000">自店オフのみ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment27')" data-price="15000">他店オフのみ</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">フットジェルネイル：オプション</span>
             </div>
             <div class="irradiations">
-            <div class="info-textmemo">⇩初めての方はこちらからお選びください⇩</div>
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
             </div>
             <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
                         <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ</button>
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">他店ジェルオフ</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">ジェルオフ金額：1,100円</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">他店ジェルオフ金額：1,100円</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">スカルプオフ金額：1,100円</button>
             </div>
         </div>
 
@@ -932,13 +936,20 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let irradiationsTimes = {
+            'ジェルオフ金額：1100円': 40,
+            '他店ジェルオフ金額：1100円': 40,
             'ジェルオフ': 40,
-            'スカルプオフ': 60
+            '他店ジェルオフ': 40,
+            'スカルプオフ金額：1100円': 60
         };
 
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
+            '自店オフのみ': 60,
+            '他店オフのみ': 60,
+            '自店スカルプオフのみ': 60,
+            '他店スカルプオフのみ': 60,
             'ワンカラー': 90,
             'マグネットワンカラー': 90,
             'グラデーション': 90,
@@ -1172,6 +1183,18 @@
                 treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>ケアマニキュア：￥3300円</strong></div>`;
             } else if (treatmentId === 'treatment21') {
                 treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>フット角質除去のみ：￥4400円<br>他のメニューに追加の方は角質除去：￥2200円</strong></div>`;
+            } else if (treatmentId === 'treatment22') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>自店オフのみ：￥2200円</strong></div>`;
+            } else if (treatmentId === 'treatment23') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>他店オフのみ：￥3300円</strong></div>`;
+            } else if (treatmentId === 'treatment24') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>自店スカルプオフのみ：￥3300円</strong></div>`;
+            } else if (treatmentId === 'treatment25') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>他店スカルプオフのみ：￥4400円<br>他のメニューに追加の方は角質除去：￥2200円</strong></div>`;
+            } else if (treatmentId === 'treatment26') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>自店オフのみ：￥2200円</strong></div>`;
+            } else if (treatmentId === 'treatment27') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>他店オフのみ：￥3300円</strong></div>`;
             } else {
                 treatmentText.innerHTML = '';
             }

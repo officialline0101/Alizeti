@@ -11,7 +11,7 @@
             position: fixed; /* 画面スクロールしても固定 */
             right: -5px; /* さらに右へ */
             top: 80%; /* 画面中央に固定 */
-            transform: translateY(-50%) translateX(13px); /* 中央配置と右ずらし */
+            transform: translateY(-50%) translateX(16px); /* 中央配置と右ずらし */
             background: #262626;
             display: flex;
             flex-direction: column;
@@ -82,7 +82,7 @@
             background-color: #fdfdfd;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 90%;
+            width: 96%;
             max-width: 500px;
             padding: 25px;
             box-sizing: border-box;
@@ -791,8 +791,11 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment12')" data-price="15000">ケアマニキュア</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment22')" data-price="15000">自店オフのみ</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment23')" data-price="15000">他店オフのみ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment29')" data-price="15000">自店チップオフ</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment24')" data-price="15000">自店スカルプオフのみ</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment25')" data-price="15000">他店スカルプオフのみ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment29')" data-price="15000">自店チップオフ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment30')" data-price="15000">他店チップオフのみ</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">ハンドジェルネイル：オプション</span>
@@ -947,6 +950,8 @@
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
+            '自店チップオフ': 90,
+            '他店チップオフのみ': 90,
             '自店オフのみ': 60,
             '他店オフのみ': 60,
             '自店スカルプオフのみ': 60,
@@ -1198,6 +1203,10 @@
                 treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>他店オフのみ：￥3300円</strong></div>`;
             } else if (treatmentId === 'treatment28') {
                 treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>チップ10本：￥7,700円</strong></div>`;
+            } else if (treatmentId === 'treatment29') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>自店チップオフ：￥2750円</strong></div>`;
+            } else if (treatmentId === 'treatment30') {
+                treatmentText.innerHTML = `<div style="text-align:center;"><strong>【税込み価格】<br>他店チップオフのみ：￥3850円</strong></div>`;
             } else {
                 treatmentText.innerHTML = '';
             }

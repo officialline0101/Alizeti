@@ -486,6 +486,11 @@
         }
 
         .info-text {
+            width: 100%;
+            /* 横幅いっぱいに */
+            box-sizing: border-box;
+            /* paddingを含める */
+            display: block;
             margin-top: 20px;
             /* 上の余白 */
             margin-bottom: 10px;
@@ -833,16 +838,16 @@
                     data-price="15000">他店スカルプオフ有のみ</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">ハンドジェルネイル：オプション</span>
+                <span class="highlight-text">オフの有無<span class="required">必須</span></span>
             </div>
             <div class="irradiations">
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)"
                     data-price="15000">ジェルオフ有</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)"
                     data-price="15000">スカルプオフ有</button>
-            </div>
-            <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
-            <div class="irradiations">
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">オフ無し</button>
+                <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)"
                     data-price="15000">ジェルオフ有金額：1100円</button>
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)"
@@ -871,21 +876,21 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment27')" data-price="15000">他店オフのみ</button>
             </div>
             <div class="highlight-background">
-                <span class="highlight-text">フットジェルネイル：オプション</span>
+                <span class="highlight-text">オフの有無</span>
             </div>
             <div class="irradiations">
                 <button type="button" id="firstirradiations" onclick="selectirradiations(this)"
                     data-price="15000">ジェルオフ有</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)"
                     data-price="15000">スカルプオフ有</button>
-            </div>
-            <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)"
-                    data-price="15000">ジェルオフ有金額：1100円</button>
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)"
-                    data-price="15000">他店ジェルオフ有金額：1100円</button>
                 <button type="button" id="repeatirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">オフ無し</button>
+                <div class="info-text">⇩１ヶ月以降の方はこちらからお選びください⇩</div>
+                <button type="button" id="qfirstirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">ジェルオフ有金額：1100円</button>
+                <button type="button" id="wfirstirradiations" onclick="selectirradiations(this)"
+                    data-price="15000">他店ジェルオフ有金額：1100円</button>
+                <button type="button" id="erepeatirradiations" onclick="selectirradiations(this)"
                     data-price="15000">スカルプオフ有金額：1100円</button>
             </div>
         </div>
@@ -988,6 +993,7 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let irradiationsTimes = {
+            'オフ無し': 0,
             'ジェルオフ有金額：1100円': 40,
             '他店ジェルオフ有金額：1100円': 40,
             'ジェルオフ有': 40,
@@ -1272,37 +1278,45 @@
 
             // 表示を更新
             updateDisplayInfo();
+
+            // Auto-scroll logic added at the end
+            const section = button.closest('.menu-section');
+            if (section) {
+                const target = section.querySelector('[id="firstirradiations"]');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
         }
 
         function selectirradiations(button) {
             // 選択された日時をリセット
             selectedFullDate = '';
 
-            // ボタンの選択状態を切り替える
-            button.classList.toggle('active');
+            // 同じセクション内の他のボタンの選択を解除 (単一選択)
+            const section = button.closest('.irradiations') || button.parentElement;
+            if (section) {
+                const buttons = section.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    if (btn !== button) btn.classList.remove('active');
+                });
+            }
+
+            // ボタンの選択状態を設定 (トグルではなく強制的にactive)
+            button.classList.add('active');
 
             // 選択されたオプションを取得
-            const selectedButtons = document.querySelectorAll('.irradiations button.active');
-            const selectedIrradiations = Array.from(selectedButtons).map(btn => btn.innerText);
-            irradiationsCount = selectedIrradiations.join(', ');
+            irradiationsCount = button.innerText;
 
-            // すべてのオプションの価格を再計算
-            optionsPrice = 0; // 全体をリセットして再計算
-            let totalirradiationsTime = 0; // 選択されたすべてのオプションの合計時間
-            selectedButtons.forEach(btn => {
-                const price = parseInt(btn.getAttribute('data-price'), 10);
-                optionsPrice += price;
+            // オプションの価格を再計算 (単一選択なので、選択されたボタンの価格のみ)
+            optionsPrice = parseInt(button.getAttribute('data-price'), 10) || 0;
 
-                // 各オプションの時間を加算
-                const irradiationName = btn.innerText;
-                const irradiationTime = irradiationsTimes[irradiationName] || 0;
-                totalirradiationsTime += irradiationTime;
-            });
+            // 時間の計算
+            const irradiationName = button.innerText;
+            selectedirradiationsTime = irradiationsTimes[irradiationName] || 0;
 
-            // selectedirradiationsTimeに合計時間を設定
-            selectedirradiationsTime = totalirradiationsTime;
-
-            console.log('選択されたオプションの合計時間:', selectedirradiationsTime);
+            console.log('選択されたオプションの時間:', selectedirradiationsTime);
+            console.log('選択されたオプションの価格:', optionsPrice);
 
             // カレンダーを更新するために取得する日付を渡す
             fetchAvailability(currentDate);
@@ -1427,6 +1441,11 @@
 
             if (!formData.selectedSymptom) {
                 alert('メニューを選択してください。');
+                return;
+            }
+
+            if (!formData.irradiationsCount) {
+                alert('オフの有無を選択してください。');
                 return;
             }
 

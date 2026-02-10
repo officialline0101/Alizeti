@@ -1389,6 +1389,12 @@
 
             // 表示を更新
             updateDisplayInfo();
+
+            // Auto-scroll to the selected section
+            const targetSection = document.getElementById(menu);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function selectDate(cell) {

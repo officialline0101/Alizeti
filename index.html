@@ -827,8 +827,7 @@
                     data-price="15000">おまかせデザイン（２時間２０分内）</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment10')"
                     data-price="15000">持ち込みしっかりデザイン</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment11')" data-price="15000">スカルプ10本</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment28')" data-price="15000">チップ10本</button>
+
                 <button type="button" onclick="selectSymptom(this, 'treatment12')" data-price="15000">ケアマニキュア</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment22')" data-price="15000">自店オフのみ</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment23')" data-price="15000">他店オフのみ</button>
@@ -838,6 +837,14 @@
                     data-price="15000">自店スカルプオフ有のみ</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment25')"
                     data-price="15000">他店スカルプオフ有のみ</button>
+            </div>
+            <div class="highlight-background" id="nagasadashiLabel">
+                <span class="highlight-text">長さ出し有無</span>
+            </div>
+            <div class="irradiations" id="nagasadashiButtons">
+                <button type="button" onclick="selectNagasadashi(this)" data-price="0">長さ出し無し</button>
+                <button type="button" onclick="selectNagasadashi(this)" data-price="0">スカルプ10本</button>
+                <button type="button" onclick="selectNagasadashi(this)" data-price="0">チップ10本</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オフの有無<span class="required">必須</span></span>
@@ -968,6 +975,7 @@
         let currentDate = new Date();
         let availabilityCache = {};
         let irradiationsCount = ''; <!-- 選択された症状を格納する変数 -->
+        let nagasadashiSelection = ''; // 長さ出し選択を格納する変数
         let totalAmount = 0; // 合計金額を格納する変数
         let menuPrice = 0; // メニューの価格
         let optionsPrice = 0; // オプションの合計価格
@@ -1004,6 +1012,15 @@
 
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
 
+        // 長さ出しの時間設定
+        let nagasadashiTimes = {
+            '長さ出し無し': 0,
+            'スカルプ10本': 120,
+            'チップ10本': 90
+        };
+
+        let selectedNagasadashiTime = 0; // 長さ出しで選択された時間
+
         let menuTimes = {
             '自店チップオフ': 90,
             '他店チップオフのみ': 90,
@@ -1021,8 +1038,7 @@
             '持ち込みデザイン（２時間２０分内）': 170,
             'おまかせデザイン（２時間２０分内）': 170,
             '持ち込みしっかりデザイン': 180,
-            'スカルプ10本': 120,
-            'チップ10本': 90,
+
             'ケアマニキュア': 90,
             '角質除去': 60
         };
@@ -1062,6 +1078,10 @@
         function updateDisplayInfo() {
             const name = document.getElementById('name').value;
             const visitCountText = visitCount ? `<span style="color:#262626;"><strong>【ご来店回数】</strong></span><br>・${visitCount}` : '・来店回数が未選択です';
+
+            const nagasadashiText = nagasadashiSelection
+                ? `<span style="color:#262626;"><strong>【長さ出し】</strong></span><br>・${nagasadashiSelection}`
+                : '';
             const selectedMenuText = selectedMenu ? `<span style="color:#262626;"><strong>【コース】</strong></span><br>・${selectedMenu}` : '・コースが未選択です';
 
             const selectedSymptomText = selectedSymptom.length > 0
@@ -1072,7 +1092,7 @@
                 ? `<span style="color:#262626;"><strong>【オプション】</strong></span><br>・${irradiationsCount.split(', ').join('<br>・')}`
                 : '・オプション無し';
 
-            let totalMinutes = selectedMenuTime + selectedirradiationsTime + selectedVisitTime;
+            let totalMinutes = selectedMenuTime + selectedirradiationsTime + selectedVisitTime + selectedNagasadashiTime;
             let hours = Math.floor(totalMinutes / 60);
             let minutes = totalMinutes % 60;
             let totalTimeText = `<span style="color:#262626;"><strong>【所要時間】</strong></span><br>・${hours > 0 ? hours + '時間' : ''}${minutes}分`;
@@ -1102,6 +1122,11 @@
             <button class="edit-button" onclick="scrollToElement('male'); scrollToElement('female'); scrollToElement('whitening');">修正する</button>
         </div>
         <hr>
+        ${nagasadashiText ? `<div class="info-row">
+            <p>${nagasadashiText}</p>
+            <button class="edit-button" onclick="scrollToElement('nagasadashiLabel')">修正する</button>
+        </div>
+        <hr>` : ''}
         <div class="info-row">
             <p>${irradiationsText}</p>
             <button class="edit-button" onclick="scrollToElement('firstirradiations')">修正する</button>
@@ -1326,6 +1351,38 @@
             updateDisplayInfo();
         }
 
+        // 長さ出し選択の関数
+        function selectNagasadashi(button) {
+            // 選択された日時をリセット
+            selectedFullDate = '';
+
+            // 同じセクション内の他のボタンの選択を解除 (単一選択)
+            const section = button.closest('#nagasadashiButtons');
+            if (section) {
+                const buttons = section.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    if (btn !== button) btn.classList.remove('active');
+                });
+            }
+
+            // ボタンの選択状態を設定
+            button.classList.add('active');
+
+            // 選択された長さ出しを取得
+            nagasadashiSelection = button.innerText;
+
+            // 時間の計算
+            selectedNagasadashiTime = nagasadashiTimes[nagasadashiSelection] || 0;
+
+            console.log('選択された長さ出しの時間:', selectedNagasadashiTime);
+
+            // カレンダーを更新するために取得する日付を渡す
+            fetchAvailability(currentDate);
+
+            // 表示を更新
+            updateDisplayInfo();
+        }
+
         function updateTotalAmount() {
             totalAmount = menuPrice + optionsPrice; // オプションの価格も含める
             updateDisplayInfo(); // 表示を更新
@@ -1384,9 +1441,11 @@
             // メニューとオプションをリセット
             selectedSymptom = '';      // メニューのリセット
             irradiationsCount = '';    // オプションのリセット
+            nagasadashiSelection = ''; // 長さ出しのリセット
             menuPrice = 0;             // メニューの価格リセット
             optionsPrice = 0;          // オプションの価格リセット
             totalAmount = 0;           // 合計金額リセット
+            selectedNagasadashiTime = 0; // 長さ出し時間リセット
 
             // 表示を更新
             updateDisplayInfo();
@@ -1430,6 +1489,7 @@
                 visitCount: visitCount,
                 selectedMenu: selectedMenu,
                 selectedSymptom: selectedSymptom && selectedSymptom.length > 0 ? selectedSymptom : null, // 空の選択肢をチェック
+                nagasadashi: nagasadashiSelection && nagasadashiSelection !== '長さ出し無し' ? nagasadashiSelection : '',
                 irradiationsCount: irradiationsCount,
                 dates: selectedFullDate ? [selectedFullDate] : null, // 空チェック
                 message: document.getElementById('message').value.trim()
@@ -1464,7 +1524,7 @@
             // LINEトークにメッセージを送信
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\nコース：${formData.selectedMenu}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\nコース：${formData.selectedMenu}\nメニュー：${formData.selectedSymptom}${formData.nagasadashi ? ',長さ出し：' + formData.nagasadashi : ''},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
             }]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('当日キャンセルは無いようにお願いいたします。');
@@ -1601,9 +1661,10 @@
                     let menuDuration = selectedMenuTime || 10;
                     let visitDuration = selectedVisitTime || 0;
                     let irradiationsDuration = selectedirradiationsTime || 0;
+                    let nagasadashiDuration = selectedNagasadashiTime || 0;
 
                     // メニュー時間と訪問回数の時間を合計して、終了時間を設定
-                    slotEnd.setMinutes(slotStart.getMinutes() + menuDuration + visitDuration + irradiationsDuration);
+                    slotEnd.setMinutes(slotStart.getMinutes() + menuDuration + visitDuration + irradiationsDuration + nagasadashiDuration);
 
                     // 終了時間が翌日 (0時以降) になる場合は✕に設定
                     if (slotEnd.getDate() !== slotStart.getDate()) {

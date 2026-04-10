@@ -842,8 +842,9 @@
             </div>
             <div class="irradiations" id="nagasadashiButtons">
                 <button type="button" onclick="selectNagasadashi(this)" data-price="0">長さ出し無し</button>
-                <button type="button" onclick="selectNagasadashi(this)" data-price="0">スカルプ10本</button>
-                <button type="button" onclick="selectNagasadashi(this)" data-price="0">チップ10本</button>
+                <button type="button" onclick="selectNagasadashi(this)" data-price="11000">スカルプ10本</button>
+                <button type="button" onclick="selectNagasadashi(this)" data-price="7700">チップ10本</button>
+                <div class="info-text">※スカルプ10本：¥11,000　／　チップ10本：¥7,700</div>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オフの有無<span class="required">必須</span></span>
@@ -978,6 +979,7 @@
         let totalAmount = 0; // 合計金額を格納する変数
         let menuPrice = 0; // メニューの価格
         let optionsPrice = 0; // オプションの合計価格
+        let nagasadashiPrice = 0; // 長さ出しの価格
 
         document.addEventListener('DOMContentLoaded', function () {
             liff.init({
@@ -1036,8 +1038,8 @@
             'ケアマニキュア': 70,
             '自店オフのみ': 60,
             '他店オフのみ': 60,
-            '自店チップorスカルプオフのみ（¥3300）': 70,
-            '他店チップorスカルプオフのみ（¥4400）': 70,
+            '自店チップorスカルプオフのみ': 70,
+            '他店チップorスカルプオフのみ': 70,
             '角質除去': 60
         };
 
@@ -1095,7 +1097,9 @@
             let minutes = totalMinutes % 60;
             let totalTimeText = `<span style="color:#262626;"><strong>【所要時間】</strong></span><br>・${hours > 0 ? hours + '時間' : ''}${minutes}分`;
 
-            const totalAmountText = `<span style="color:#262626;"><strong>【合計金額】</strong></span><br>・¥${menuPrice + optionsPrice}`;
+            // 合計金額の計算（メニュー + オプション + 長さ出し）
+            let totalPriceValue = menuPrice + optionsPrice + nagasadashiPrice;
+            const totalAmountText = `<span style="color:#262626;"><strong>【合計金額（税込）】</strong></span><br>・¥${totalPriceValue.toLocaleString()}`;
             const selectedDateText = selectedFullDate ? `<span style="color:#262626;"><strong>【希望日時】</strong></span><br>・${selectedFullDate}` : '・日時が未選択です';
 
             // 修正ボタン付きのHTMLを作成
@@ -1366,6 +1370,9 @@
             // 選択された長さ出しを取得
             nagasadashiSelection = button.innerText;
 
+            // 価格の計算
+            nagasadashiPrice = parseInt(button.getAttribute('data-price'), 10) || 0;
+
             // 時間の計算
             selectedNagasadashiTime = nagasadashiTimes[nagasadashiSelection] || 0;
 
@@ -1439,6 +1446,7 @@
             nagasadashiSelection = ''; // 長さ出しのリセット
             menuPrice = 0;             // メニューの価格リセット
             optionsPrice = 0;          // オプションの価格リセット
+            nagasadashiPrice = 0;      // 長さ出しの価格リセット
             totalAmount = 0;           // 合計金額リセット
             selectedNagasadashiTime = 0; // 長さ出し時間リセット
 
